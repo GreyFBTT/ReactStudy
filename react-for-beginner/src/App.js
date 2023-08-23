@@ -1,31 +1,23 @@
-import Button from "./Button";
-import styles from "./App.module.css";
 import { useState, useEffect } from "react";
 
-function App() {
-  const [value, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const onClick = () => setValue((prev) => prev + 1);
-  const onChange = (e) => {
-    setKeyword(e.target.value);
-  };
-  console.log("run all the time");
+function Hello() {
   useEffect(() => {
-    if (keyword !== "" && keyword.length > 5) {
-      console.log(`Search for ${keyword}`);
-    }
-  }, [keyword]);
+    console.log("hello");
+  }, []);
+  console.log("hello");
+  return <div>Hello</div>;
+}
+
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => {
+    setShowing((prev) => !prev);
+  };
+
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search here"
-        value={keyword}
-        onChange={onChange}
-      />
-      <h1 className={styles.title}>Welcome back</h1>
-      <Button onClick={onClick} text="sdfa"></Button>
-      <span>{value}</span>
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
     </div>
   );
 }
